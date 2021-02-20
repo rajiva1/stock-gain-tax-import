@@ -11,6 +11,12 @@ from Form 1099-B.  Unfortunately, neither Charles Schwab nor TD
 Ameritrade provide a TXF file.  They only provide a PDF file
 containing Form 1099-B.
 
+## Update for 2020
+
+TD Ameritrade reports may not work anymore because I don't have a current
+sample. For Charles Schwab, a minor change in column boundaries was required
+for "VARIOUS" dates.
+
 ## Update for 2018
 
 There were minor layout changes in the PDF files.  For TD Ameritrade, that
@@ -48,7 +54,7 @@ Next, the python script for the respective brokerage company parses the text
 file into comma-separated values.  Option symbols are normalized.  Negative
 counts indicate short sales.
 
-    python3 process-schwab-2018.py 1099-b.txt > 1099-b.csv
+    python3 process-schwab-2020.py 1099-b.txt > 1099-b.csv
     python3 process-ameritrade-2018.py 1099-b.txt > 1099-b.csv
 
 The CSV file can be edited with a text editor or Microsoft Excel to make

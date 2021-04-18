@@ -29,8 +29,9 @@ import csv
 import datetime
 
 box_dict = {'A': 321, 'B': 711, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
-# Only two taxrefs for wash sales are documented in Section IV.  One
-# of those is used in Example 2C.  Example 2G for a long-term wash
+# Only two taxrefs for wash sales are documented in Section IV. Better to use
+# Example 2D instead of Example 2C to ensure that turbotax doesn't forget to 
+# check 'box A' in the sales category.  Example 2G for a long-term wash
 # sale uses taxref 713.
 wash_box_dict = {'A': 682, 'B': 718, 'C': 712, 'D': 323, 'E': 713, 'F': 714}
 
@@ -56,10 +57,12 @@ with open(sys.argv[1], 'r') as csvfile:
         gain = row[7]
         wash_sale_loss = row[9]
         box = row[10]
-        taxref = (wash_box_dict[box]
-                  if wash_sale_loss and wash_sale_loss != '--' and
-                  wash_sale_loss != '0.00'
-                  else box_dict[box])
+        taxref = box_dict[box]
+# the following should be used if example 2C washsale, but we are using example 2D 
+#        taxref = (wash_box_dict[box]
+#                  if wash_sale_loss and wash_sale_loss != '--' and
+#                  wash_sale_loss != '0.00'
+#                  else box_dict[box])
         prefix = ' '
         if '/' in symbol:
             prefix = ' opt '
@@ -89,4 +92,3 @@ with open(sys.argv[1], 'r') as csvfile:
             wash_sale_loss != '0.00'):
             print('$' + wash_sale_loss)
         print('^')
-
